@@ -18,6 +18,15 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 -- while logic devices now run in the 3.3V and lower range.  Thus, you must be 
 -- careful to choose a FET with a low threshold voltage, or a level-converter must
 -- be utilized between the logic output and the gate of the drive FET's.
+-- Practical tip: FET's with very high currect handling capabilities, in general
+-- (so be sure to read the datasheet before you buy), tend to handle larger currents
+-- for any given gate voltage.  This means that in many cases, even if Vgs is rated at 5 volts
+-- if your stepper uses relatively low current, the FET's may still drive it at 3.3V or lower.
+-- In the worst case, you are likely going to need a high voltage power supply to drive the
+-- motors anyway, so you can "double-up" low power FET's to drive the gates of the power FET's
+-- with a higher voltage.  In effect, the low-power FET's are wired as inverters with a low
+-- swithcing voltage.  Contact Franks Development for a napkin-sketch if you aren't familiar
+-- with how to do that.  Good luck.
 --
 -- One of the most advantageous abilities of stepper motors is the ability to 
 -- provide static holding force in any position.  Of course this consumes power
@@ -29,8 +38,8 @@ entity StepperMotorPorts is
 	 			StepDrive : out std_logic_vector(3 downto 0);
 		 		clock : in std_logic;
 		 		Direction : in std_logic;
-		 		StepEnable : in std_logic --;
-		 		--ProvideStaticHolding : in std_logic
+		 		StepEnable : in std_logic;
+		 		ProvideStaticHolding : in std_logic
 		);
 end StepperMotorPorts;
 
@@ -53,7 +62,15 @@ begin
 
 				StepCounter <= "00000000000000000000000000000000";
 
-				StepDrive <= "0000";
+				if (ProvideStaticHolding = '1') then
+
+					StepDrive <= "0000";
+
+				else
+
+					StepDrive <= "1111";
+
+				end if;
 				
 				if (StepEnable = '1') then
 				

@@ -8,8 +8,8 @@ NET Direction LOC = P29;
 NET Direction PULLUP;
 NET StepEnable LOC = P31;
 NET StepEnable PULLUP;
-# NET ProvideStaticHolding LOC = P32;
-# NET ProvideStaticHolding PULLUP;
+NET ProvideStaticHolding LOC = P33;
+NET ProvideStaticHolding PULLUP;
 
 
 
