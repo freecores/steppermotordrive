@@ -25,11 +25,12 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 -- use of the "static holding" input port will specify this behavior.
 
 entity StepperMotorPorts is
-    Port ( StepDrive : out std_logic_vector(3 downto 0);
-		 clock : in std_logic;
-		 Direction : in std_logic;
-		 StepEnable : in std_logic;
-		 ProvideStaticHolding : in std_logic
+    Port (	
+	 			StepDrive : out std_logic_vector(3 downto 0);
+		 		clock : in std_logic;
+		 		Direction : in std_logic;
+		 		StepEnable : in std_logic --;
+		 		--ProvideStaticHolding : in std_logic
 		);
 end StepperMotorPorts;
 
@@ -38,7 +39,6 @@ architecture StepDrive of StepperMotorPorts is
 	signal state : std_logic_vector(1 downto 0);
 	signal StepCounter : std_logic_vector(31 downto 0);
 	constant StepLockOut : std_logic_vector(31 downto 0) := "00000000000000110000110101000000";
-	
 
 begin
 

@@ -1,23 +1,15 @@
 NET clock LOC = P181;
-NET quada LOC = P8;
-NET quadb LOC = P9;
-NET quada PULLUP;
-NET quadb PULLUP;
+NET clock PERIOD = 40; # 40ns = 25MHz
 NET stepdrive<0> LOC = P25;
 NET stepdrive<1> LOC = P26;
 NET stepdrive<2> LOC = P27;
 NET stepdrive<3> LOC = P28;
-NET extra1<0> LOC=P55;
-NET extra1<1> LOC=P56;
-NET extra1<2> LOC=P57;
-NET extra1<3> LOC=P58;
-NET extra1<4> LOC=P59;
-NET extra1<5> LOC=P60;
-NET extra1<6> LOC=P61;
-NET extra1<7> LOC=P62;
-NET extra1<8> LOC=P64;
-NET extra1<9> LOC=P65;
-NET extra1<10> LOC=P66;
-NET extra1<11> LOC=P67;
-NET extra1<12> LOC=P68;
-NET extra1<13> LOC=P69;
+NET Direction LOC = P29;
+NET Direction PULLUP;
+NET StepEnable LOC = P31;
+NET StepEnable PULLUP;
+# NET ProvideStaticHolding LOC = P32;
+# NET ProvideStaticHolding PULLUP;
+
+
+
