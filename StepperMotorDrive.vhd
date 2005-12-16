@@ -60,7 +60,7 @@ entity StepperMotorPorts is
 		);
 end StepperMotorPorts;
 
-architecture StepDrive of StepperMotorPorts is
+architecture StepperMotor of StepperMotorPorts is
 
 	signal state : std_logic_vector(1 downto 0);				-- simple state machine, 4 states
 	signal StepCounter : std_logic_vector(31 downto 0);   -- most motors won't spin extrordinarially fast, so this slows the clock input way down
@@ -86,16 +86,6 @@ begin
 
 				StepCounter <= "00000000000000000000000000000000";		-- if we just roll-ed over, then it's time to do something
 
-				if (ProvideStaticHolding = '1') then --should we leave coils in energized state by defaul or not?
-
-					StepDrive <= "0000";
-
-				else
-
-					StepDrive <= "1111";
-
-				end if;
-				
 				if (InternalStepEnable = '1') then -- are we supposed to step on this clock?
 
 					InternalStepEnable <= StepEnable; 	-- InternalStepEnable togles at the speed of the clock divider rollover, trailing the 
@@ -127,6 +117,14 @@ begin
 						when others =>
 
 					end case; --state
+					
+				else
+					
+					if (ProvideStaticHolding = '0') then --should we leave coils in energized state by defaul or not?
+		
+						StepDrive <= "0000";
+		
+					end if;
 	
 				end if;
 	
@@ -136,4 +134,4 @@ begin
 
 	end process;
 
-end StepDrive;
+end StepperMotor;
